@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import jwt from "jsonwebtoken"
 import { token$, updateToken } from '../store'
 import { Redirect } from 'react-router-dom';
 
@@ -34,7 +35,7 @@ const Home = () => {
             headers: { Authorization: "Bearer " + token }
         })
         .then((res) => {
-          //console.log(res.data);
+          console.log(res);
           setProtectedQuote(res.data)
         })
         .catch((err) => {
@@ -52,6 +53,13 @@ const Home = () => {
         window.localStorage.clear();
         setToLogin(true)
     }
+
+    const getEmail = (access_token) => {
+        //if we do not have access to 'secret-key' then funk / decode (token) get info
+        const decoded = jwt.decode(access_token);
+        //console.log(decoded)
+        return decoded.sub;
+    }
     
     return (
         <div>
@@ -63,6 +71,7 @@ const Home = () => {
             <h3>Protected Quote</h3>
             {protectedQuote ? (
                 <>
+                    Login by: <span style={{color:'blue'}}>{getEmail(token)}</span>
                     <button onClick={handleLogout}>Logout</button>
                     <p>{protectedQuote}</p>
                 </>

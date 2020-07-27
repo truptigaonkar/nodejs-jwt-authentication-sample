@@ -15,7 +15,7 @@ const Login = () => {
         let source = axios.CancelToken.source()
         axios.post('http://localhost:3001/sessions/create', { username, password }, { headers: { Authorization: "Bearer " + token }}, {cancelToken: source.token})
         .then((res) => {
-            //console.log(res.data);
+            //console.log(res.config.data);
             updateToken(res.data.access_token); // Token
             window.localStorage.setItem("token", res.data.token)  // Saving token in localStorage
             setToHome(true)
