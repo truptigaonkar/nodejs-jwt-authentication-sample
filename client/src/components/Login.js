@@ -12,19 +12,23 @@ const Login = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        axios.post('http://localhost:3001/sessions/create', { username, password }, { headers: { Authorization: "Bearer " + token }})
+        let source = axios.CancelToken.source()
+        axios.post('http://localhost:3001/sessions/create', { username, password }, { headers: { Authorization: "Bearer " + token }}, {cancelToken: source.token})
         .then((res) => {
-            console.log(res.data);
-            updateToken(res.data.token); // Token
-          window.localStorage.setItem("token", res.data.token)  // Saving token in localStorage
+            //console.log(res.data);
+            updateToken(res.data.access_token); // Token
+            window.localStorage.setItem("token", res.data.token)  // Saving token in localStorage
             setToHome(true)
             setUsername([])
             setPassword([])
         })
         .catch((err) => {
+            if (!axios.isCancel(err)) {
             setError(err.message);
             //setError(err.response.data.message)
-        }); 
+            }
+        });
+        return () =>{source.cancel()}
     }
     return (
         <div>
