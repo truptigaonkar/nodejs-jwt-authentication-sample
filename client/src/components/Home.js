@@ -41,6 +41,7 @@ const Home = () => {
         .catch((err) => {
             if (!axios.isCancel(err)) {
                 setError(err.message);
+                //setError(err.response.data.message)
             }
             updateToken(null);
         });
@@ -64,7 +65,7 @@ const Home = () => {
     return (
         <div>
             <h4>Home</h4>
-            <div style={{color:'red'}}>{error && <div>Login: <b>{error}</b></div>}</div>
+            <div style={{color:'red'}}>{error && <div>HOME: <b>Unauthorized User</b> - {error}</div>}</div>
             {toLogin ? <Redirect to="/" /> : null}
             <h3>Unprotected Quote</h3>
             <p>{quote}</p>

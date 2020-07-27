@@ -26,6 +26,8 @@ const Login = () => {
             if (!axios.isCancel(err)) {
             setError(err.message);
             //setError(err.response.data.message)
+            setUsername([])
+            setPassword([])
             }
         });
         return () =>{source.cancel()}
@@ -34,10 +36,10 @@ const Login = () => {
         <div>
             <h4>Login</h4>
             {toHome ? <Redirect to="/home" /> : null}
-            <div style={{color:'red'}}>{error && <div>Register: Please fill in all the fields - <b>{error}</b></div>}</div>
+            <div style={{color:'red'}}>{error && <div><b>LOGIN: Unauthorized User - {error}</b></div>}</div>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Username...." value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="password" placeholder="Password...." value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <input type="text" placeholder="Username...." value={username} onChange={(e) => setUsername(e.target.value)} required />
+                <input type="password" placeholder="Password...." value={password} onChange={(e) => setPassword(e.target.value)} required />
                 <button>Login</button>
             </form>
         </div>
