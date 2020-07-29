@@ -4,28 +4,11 @@ import jwt from "jsonwebtoken"
 import { token$, updateToken } from '../store'
 import { Redirect } from 'react-router-dom';
 
-const Home = () => {
+const Protected = () => {
     const [toLogin, setToLogin] = useState(false)
     const [error, setError] = useState(false)
-    const [quote, setQuote] = useState('')
     const [protectedQuote, setProtectedQuote] = useState('')
     const [token] = useState(token$.value)
-
-    // Unprotected route
-    useEffect(() => {
-        let source = axios.CancelToken.source()
-        axios.get('http://localhost:3001/api/random-quote')
-        .then((res) => {
-            //console.log(res.data);
-            setQuote(res.data)
-        })
-        .catch((err) => {
-            if (!axios.isCancel(err)) {
-                setError(err.message);
-            }
-        });
-        return () =>{ source.cancel()}
-    }, []);
 
     // Protected route
     useEffect(() => {
@@ -64,11 +47,9 @@ const Home = () => {
     
     return (
         <div>
-            <h4>Home</h4>
-            <div style={{color:'red'}}>{error && <div>HOME: <b>Unauthorized User</b> - {error}</div>}</div>
+            <h4>Protected</h4>
+            <div style={{color:'red'}}>{error && <div>Protected: <b>Unauthorized User</b> - {error}</div>}</div>
             {toLogin ? <Redirect to="/" /> : null}
-            <h3>Unprotected Quote</h3>
-            <p>{quote}</p>
             <h3>Protected Quote</h3>
             {protectedQuote ? (
                 <>
@@ -83,4 +64,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Protected;

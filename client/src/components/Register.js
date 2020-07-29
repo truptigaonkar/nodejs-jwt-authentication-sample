@@ -36,7 +36,6 @@ const Register = () => {
     }
 
     return (
-        <div className="register-page">
             <div className="form-box">
             <h4 className="register-title">Register</h4>
             <div style={{color:'red'}}>{error && <div><b>REGISTER: User already exists - {error}</b></div>}</div>
@@ -49,7 +48,6 @@ const Register = () => {
             </form><br />
             <p>Already member? <Link to="/">Login to Account</Link></p>
             </div>
-        </div>
     )
 }
 

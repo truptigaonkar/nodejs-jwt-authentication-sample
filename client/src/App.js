@@ -3,18 +3,25 @@ import './App.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import Login from './components/Login';
 import Register from './components/Register';
-import Home from './components/Home';
+import Protected from './components/Protected';
+import Unprotected from './components/Unprotected';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <li><Link to="/">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
-        <li><Link to="/home">Home</Link></li> */}
+        <nav className="navigation">
+        <ul>
+          <li><Link className="link" to="/">Login</Link></li>
+          <li><Link className="link" to="/register">Register</Link></li>
+          <li><Link className="link" to="/unprotected">Unprotected</Link></li>
+          <li><Link className="link" to="/protected">Protected</Link></li> 
+        </ul>
+        </nav>
         <Route exact path="/" component={Login} style={{ backgroundColor: '#44c4e7' }}/>
-        <Route exact path="/register" component={Register}/>
-        <Route exact path="/home" component={Home}/>
+        <Route path="/register" component={Register}/>
+        <Route path="/protected" component={Protected}/>
+        <Route path="/unprotected" component={Unprotected}/>
       </Router>
     </div>
   );

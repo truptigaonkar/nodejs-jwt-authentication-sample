@@ -34,10 +34,9 @@ const Login = () => {
         return () =>{source.cancel()}
     }
     return (
-        <div className="login-page">
             <div className="form-box">
                 <h4 className="login-title">Login To Your Account</h4>
-                {toHome ? <Redirect to="/home" /> : null}
+                {toHome ? <Redirect to="/protected" /> : null}
                 <div style={{color:'red'}}>{error && <div><b>Unauthorized User - {error}</b></div>}</div>
                 <form onSubmit={handleSubmit}>
                     <input className="input-box" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
@@ -46,7 +45,6 @@ const Login = () => {
                 </form><br />
                 <p>Not a member? <Link to="register">Create Account</Link></p>
             </div>
-        </div>
     )
 }
 
