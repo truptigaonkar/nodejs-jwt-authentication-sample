@@ -26,10 +26,7 @@ body{
   background:linear-gradient(#54a7e3,#103652);
   padding:12px 20px;
 }
-.navigation .link {
-  color:#fff;
-  text-decoration:none;
-}
+
 .navigation li:hover {
   background:#1169b0;
   box-shadow:inset 0 0  10px 1px rgba(0,0,0,.3);
@@ -40,4 +37,14 @@ body{
  } 
 .navigation li:last-child a {
   border-radius:0 4px 4px 0;
+}
+
+.alink{
+  text-decoration: none;
+  color: #fff;
+  margin:10px
+}
+
+a.active-class{
+  color:#44c4e7;
 }

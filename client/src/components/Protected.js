@@ -47,10 +47,9 @@ const Protected = () => {
     
     return (
         <div>
-            <h4>Protected</h4>
+            <h3>Protected Quote</h3>
             <div style={{color:'red'}}>{error && <div>Protected: <b>Unauthorized User</b> - {error}</div>}</div>
             {toLogin ? <Redirect to="/" /> : null}
-            <h3>Protected Quote</h3>
             {protectedQuote ? (
                 <>
                     Login by: <span style={{color:'blue'}}>{getEmail(token)}</span>
