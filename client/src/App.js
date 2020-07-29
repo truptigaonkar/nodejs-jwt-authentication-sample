@@ -15,7 +15,7 @@ function App() {
           <li><NavLink className="alink" exact activeClassName='active-class' to="/">Login</NavLink></li>
           <li><NavLink className="alink" exact activeClassName='active-class' to="/register">Register</NavLink></li>
           <li><NavLink className="alink" exact activeClassName='active-class' to="/unprotected">Unprotected</NavLink></li>
-          <li><NavLink className="alink" exact activeClassName='active-class' to="/protected">Protected</NavLink></li> 
+          <li><NavLink className="alink" exact activeClassName='active-class' to="/protected">Protected</NavLink></li>
         </ul>
         </nav>
         <Switch>

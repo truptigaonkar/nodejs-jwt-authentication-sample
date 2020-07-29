@@ -23,7 +23,7 @@ const Unprotected = () => {
     }, []);
 
     return (
-        <div>
+        <div style={{borderBottom:'1px solid black'}}>
             <h3>Unprotected Quote</h3>
             <div style={{color:'red'}}>{error && <div>HOME: <b>Unauthorized User</b> - {error}</div>}</div>
             <p>{quote}</p>

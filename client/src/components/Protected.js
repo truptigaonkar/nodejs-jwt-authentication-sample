@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import jwt from "jsonwebtoken"
 import { token$, updateToken } from '../store'
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import Logout from './Logout';
 
 const Protected = () => {
     const [toLogin, setToLogin] = useState(false)
@@ -31,13 +32,6 @@ const Protected = () => {
         return () =>{source.cancel() }
     }, [token]);
 
-    const handleLogout = (e) =>{
-        e.preventDefault();
-        updateToken(null);
-        window.localStorage.clear();
-        setToLogin(true)
-    }
-
     const getEmail = (access_token) => {
         //if we do not have access to 'secret-key' then funk / decode (token) get info
         const decoded = jwt.decode(access_token);
@@ -46,18 +40,17 @@ const Protected = () => {
     }
     
     return (
-        <div>
-            <h3>Protected Quote</h3>
-            <div style={{color:'red'}}>{error && <div>Protected: <b>Unauthorized User</b> - {error}</div>}</div>
+        <div style={{borderBottom:'1px solid black', marginTop:'10px'}}>
             {toLogin ? <Redirect to="/" /> : null}
             {protectedQuote ? (
                 <>
-                    Login by: <span style={{color:'blue'}}>{getEmail(token)}</span>
-                    <button onClick={handleLogout}>Logout</button>
+                    <h3>Protected Quote</h3>
+                    <div style={{color:'red'}}>{error && <div>Protected: <b>Unauthorized User</b> - {error}</div>}</div>
+                    Login by: <span style={{color:'blue'}}>{getEmail(token)}</span><Logout />
                     <p>{protectedQuote}</p>
                 </>
             ) : (
-                <b>Unauthorized protected route... Please login first to see protected Quote....</b>
+                <span style={{color:'red'}}>Unauthorized protected route... Please <Link to="/">LOGIN</Link> first to see protected Quote....</span>
               )} 
         </div>
     )
