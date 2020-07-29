@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import axios from 'axios'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import { token$, updateToken } from '../store'
+import './Login.css'
 
 const Login = () => {
     const [token] = useState(token$.value)
@@ -33,15 +34,18 @@ const Login = () => {
         return () =>{source.cancel()}
     }
     return (
-        <div>
-            <h4>Login</h4>
-            {toHome ? <Redirect to="/home" /> : null}
-            <div style={{color:'red'}}>{error && <div><b>LOGIN: Unauthorized User - {error}</b></div>}</div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Username...." value={username} onChange={(e) => setUsername(e.target.value)} required />
-                <input type="password" placeholder="Password...." value={password} onChange={(e) => setPassword(e.target.value)} required />
-                <button>Login</button>
-            </form>
+        <div className="login-page">
+            <div className="form-box">
+                <h4 className="login-title">Login To Your Account</h4>
+                {toHome ? <Redirect to="/home" /> : null}
+                <div style={{color:'red'}}>{error && <div><b>Unauthorized User - {error}</b></div>}</div>
+                <form onSubmit={handleSubmit}>
+                    <input className="input-box" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                    <input className="input-box" type="password" placeholder="................." value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <button className="login-button">Login</button>
+                </form>
+                <p>Not a member? <Link to="register">Create Account</Link></p>
+            </div>
         </div>
     )
 }

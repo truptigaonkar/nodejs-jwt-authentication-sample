@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
+import './Register.css'
 
 const Register = () => {
     const [username, setUsername] = useState('')
@@ -25,22 +27,28 @@ const Register = () => {
                 console.log(err)
             setError(err.message);
             //setError(err.response.data.message)
+            setUsername([])
+            setPassword([])
+            setExtra([])
             }
         });
         return () =>{source.cancel()}
     }
 
     return (
-        <div>
-            <h4>Register</h4>
+        <div className="register-page">
+            <div className="form-box">
+            <h4 className="register-title">Register</h4>
             <div style={{color:'red'}}>{error && <div><b>REGISTER: User already exists - {error}</b></div>}</div>
             <p style={{color:'green'}}>{message}</p>
             <form onSubmit={handleRegister}>
-                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-                <input type="text" placeholder="Extra" value={extra} onChange={(e) => setExtra(e.target.value)} required/>
-                <button>REGISTER</button>
+                <input className="input-box" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                <input className="input-box" type="password" placeholder="................." value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                <input className="input-box" type="text" placeholder="Extra" value={extra} onChange={(e) => setExtra(e.target.value)} required/>
+                <button className="register-button">REGISTER</button>
+                <p>Already member? <Link to="/">Login to Account</Link></p>
             </form>
+            </div>
         </div>
     )
 }

@@ -9,10 +9,10 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <li><Link to="/">Login</Link></li>
+        {/* <li><Link to="/">Login</Link></li>
         <li><Link to="/register">Register</Link></li>
-        <li><Link to="/home">Home</Link></li>
-        <Route exact path="/" component={Login}/>
+        <li><Link to="/home">Home</Link></li> */}
+        <Route exact path="/" component={Login} style={{ backgroundColor: '#44c4e7' }}/>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/home" component={Home}/>
       </Router>
