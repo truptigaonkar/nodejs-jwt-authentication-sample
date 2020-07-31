@@ -1,7 +1,62 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import './Register.css'
+import styled from 'styled-components'
+
+const Formbox = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    width: 285px;
+    margin: -140px 0 0 -182px;
+    padding: 40px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+`;
+
+const Registertitle = styled.h4`
+    margin: 0 0 20px;
+    line-height: 1;
+    color: #44c4e7;
+    font-size: 18px;
+    font-weight: 400;
+`;
+
+const Inputbox = styled.input`
+    outline: none;
+    display: block;
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    color: #ccc;
+    font-family: "Roboto";
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: 0.2s linear;
+    :focus {
+        color: #333;
+        border: 1px solid #44c4e7;
+    }
+`;
+
+const Registerbutton = styled.button`
+    cursor: pointer;
+    background: #44c4e7;
+    width: 100%;
+    padding: 10px 15px;
+    border: 0;
+    color: #fff;
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: 400;
+    &:hover {
+        background: #369cb8;
+    }
+`;
 
 const Register = () => {
     const [username, setUsername] = useState('')
@@ -36,18 +91,18 @@ const Register = () => {
     }
 
     return (
-            <div className="form-box">
-            <h4 className="register-title">Register</h4>
+            <Formbox>
+            <Registertitle>Register</Registertitle>
             <div style={{color:'red'}}>{error && <div><b>REGISTER: User already exists - {error}</b></div>}</div>
             <p style={{color:'green'}}>{message}</p>
             <form onSubmit={handleRegister}>
-                <input className="input-box" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
-                <input className="input-box" type="password" placeholder="................." value={password} onChange={(e) => setPassword(e.target.value)} required/>
-                <input className="input-box" type="text" placeholder="Extra" value={extra} onChange={(e) => setExtra(e.target.value)} required/>
-                <button className="register-button">REGISTER</button>
+                <Inputbox type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                <Inputbox type="password" placeholder="................." value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                <Inputbox type="text" placeholder="Extra" value={extra} onChange={(e) => setExtra(e.target.value)} required/>
+                <Registerbutton>REGISTER</Registerbutton>
             </form><br />
             <p>Already member? <Link to="/">Login to Account</Link></p>
-            </div>
+            </Formbox>
     )
 }
 

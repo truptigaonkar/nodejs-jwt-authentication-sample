@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import {Redirect, Link} from 'react-router-dom'
 import { token$, updateToken } from '../store'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Formbox = styled.div`
     position: absolute;
