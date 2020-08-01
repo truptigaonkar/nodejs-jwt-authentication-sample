@@ -89,7 +89,6 @@ const Register = () => {
         });
         return () =>{source.cancel()}
     }
-
     return (
             <Formbox>
             <Registertitle>Register</Registertitle>

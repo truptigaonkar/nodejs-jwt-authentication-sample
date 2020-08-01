@@ -40,14 +40,17 @@ const Li = styled.li`
   :last-child a {
     border-radius:0 4px 4px 0;
   }
-  .alink{
-    text-decoration: none;
-    color: #fff;
-    margin:10px
-  }
-  a.active-class{
+`;
+
+const activeClassName = 'nav-item-active'
+
+const StyledLink = styled(NavLink).attrs({ activeClassName })`
+  &.${activeClassName} {
     color:#44c4e7;
   }
+  text-decoration: none;
+  color: #fff;
+  margin:10px
 `;
 
 function App() {
@@ -57,10 +60,10 @@ function App() {
       <Router>
         <nav>
         <Ul>
-          <Li><NavLink className="alink" exact activeClassName='active-class' to="/">Login</NavLink></Li>
-          <Li><NavLink className="alink" exact activeClassName='active-class' to="/register">Register</NavLink></Li>
-          <Li><NavLink className="alink" exact activeClassName='active-class' to="/unprotected">Unprotected</NavLink></Li>
-          <Li><NavLink className="alink" exact activeClassName='active-class' to="/protected">Protected</NavLink></Li>
+          <Li><StyledLink exact activeClassName='active-class' to="/">Login</StyledLink></Li>
+          <Li><StyledLink exact activeClassName='active-class' to="/register">Register</StyledLink></Li>
+          <Li><StyledLink exact activeClassName='active-class' to="/unprotected">Unprotected</StyledLink></Li>
+          <Li><StyledLink exact activeClassName='active-class' to="/protected">Protected</StyledLink></Li>
         </Ul>
         </nav>
         <Switch>
