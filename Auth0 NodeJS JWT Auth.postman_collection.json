@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "fb19ed76-f0d3-4466-9882-038c56c70bd3",
+		"name": "Auth0 NodeJS JWT Auth",
+		"description": "This is a NodeJS API that supports username and password authentication with JWTs and has APIs that return Chuck Norris phrases. How awesome is that?\n\nhttps://github.com/auth0-blog/nodejs-jwt-authentication-sample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"password\",\n\t\"extra\": \"tech\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"users"
+					]
+				},
+				"description": "The body must have `username`, `password` and `extra`. It returns `id_token` and `access_token` which are signed with the secret located at the `config.json` file. The `id_token` will contain the `username` and the `extra` information sent, while the `access_token` will contain the `audience`, `jti`, `issuer` and `scope`."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Session",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/sessions/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"sessions",
+						"create"
+					]
+				},
+				"description": "The body must have `username` and `password`. It returns `id_token` and `access_token` are signed with the secret located at the `config.json` file. The `id_token` will contain the `username` and the `extra` information sent, while the `access_token` will contain the `audience`, `jti`, `issuer` and `scope`."
+			},
+			"response": []
+		},
+		{
+			"name": "Random Quote",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/random-quote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"random-quote"
+					]
+				},
+				"description": "It returns a String with a Random quote from Chuck Norris. It doesn't require authentication."
+			},
+			"response": []
+		},
+		{
+			"name": "Protected Random Quote",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {your.jwt.token}",
+						"description": "Replace {your.jwt.token} with your JWT token."
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/protected/random-quote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"protected",
+						"random-quote"
+					]
+				},
+				"description": "It returns a String with a Random quote from Chuck Norris. It requires authentication. \n\nThe JWT - `access_token` must be sent on the `Authorization` header as follows: `Authorization: Bearer {jwt}`"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3001/sessions/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dvbnRvLmNvbSIsImF1ZCI6Im5vZGVqcy1qd3QtYXV0aCIsImV4cCI6MTU5NTc4Njk2MSwic2NvcGUiOiJmdWxsX2FjY2VzcyIsInN1YiI6ImxhbGFsYW5kfGdvbnRvIiwianRpIjoiV05tRHcybzVTWHFsbkZueiIsImFsZyI6IkhTMjU2IiwiaWF0IjoxNTk1NzgzMzYxfQ.fZkJVXqZWD3FnwRy7x0dz_Hwl_zGnYSqkWn5sXhD1KI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"gonto\",\n\t\"password\": \"gonto\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/sessions/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"sessions",
+						"create"
+					]
+				},
+				"description": "existing user gonto/gonto"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
